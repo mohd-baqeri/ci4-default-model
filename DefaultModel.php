@@ -14,6 +14,9 @@ class DefaultModel extends Model
      * searchTblRows
      * searchTblRowsJoin
      * getTblRow
+     * getTblRowFirst
+     * getTblRowLast
+     * getTblRowMath
      * getTblRowJoin
      * deleteTblRow
      * getTblRowsDistinct
@@ -37,11 +40,11 @@ class DefaultModel extends Model
     }
 
     // getTblRows
-    public function getTblRows($tbl, $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+    public function getTblRows($tbl, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->orderBy($orderBy, $orderVal);
+        $builder->orderBy($orderBy);
         if ($limit && !$offset) $builder->limit($limit);
         if ($limit && $offset) $builder->limit($limit, $offset);
         $query = $builder->get();
@@ -49,12 +52,12 @@ class DefaultModel extends Model
     }
 
     // getTblRowsJoin
-    public function getTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+    public function getTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl1);
         $builder->select($select);
         $builder->where($where);
-        $builder->orderBy($orderBy, $orderVal);
+        $builder->orderBy($orderBy);
         $builder->join($tbl2, $onClause);
         if ($limit && !$offset) $builder->limit($limit);
         if ($limit && $offset) $builder->limit($limit, $offset);
@@ -63,12 +66,12 @@ class DefaultModel extends Model
     }
 
     // searchTblRows
-    public function searchTblRows($tbl, $like = [], $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+    public function searchTblRows($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->like($like);
         $builder->where($where);
-        $builder->orderBy($orderBy, $orderVal);
+        $builder->orderBy($orderBy);
         if ($limit && !$offset) $builder->limit($limit);
         if ($limit && $offset) $builder->limit($limit, $offset);
         $query = $builder->get();
@@ -76,13 +79,13 @@ class DefaultModel extends Model
     }
 
     // searchTblRowsJoin
-    public function searchTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+    public function searchTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl1);
         $builder->select($select);
         $builder->where($where);
         $builder->like($like);
-        $builder->orderBy($orderBy, $orderVal);
+        $builder->orderBy($orderBy);
         $builder->join($tbl2, $onClause);
         if ($limit && !$offset) $builder->limit($limit);
         if ($limit && $offset) $builder->limit($limit, $offset);
@@ -99,12 +102,49 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 
+    // getTblRowFirst
+    public function getTblRowFirst($tbl, $where = [], $orderBy = 'id ASC')
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->orderBy($orderBy);
+        $builder->limit(1);
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
+    // getTblRowLast
+    public function getTblRowLast($tbl, $where = [], $orderBy = 'id DESC')
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->orderBy($orderBy);
+        $builder->limit(1);
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
+    // getTblRowMath
+    public function getTblRowMath($tbl, $math = 'SUM', $col, $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        if ($math == 'AVG') $builder->selectAvg($col, 'avg_' . $col);
+        if ($math == 'COUNT') $builder->selectCount($col, 'count_' . $col);
+        if ($math == 'MAX') $builder->selectMax($col, 'max_' . $col);
+        if ($math == 'MIN') $builder->selectMin($col, 'min_' . $col);
+        if ($math == 'SUM') $builder->selectSum($col, 'sum_' . $col);
+        $builder->where($where);
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
     // getTblRowJoin
-    public function getTblRowJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [])
+    public function getTblRowJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = '')
     {
         $builder = $this->db->table($tbl1);
         $builder->select($select);
         $builder->where($where);
+        $builder->orderBy($orderBy);
         $builder->join($tbl2, $onClause);
         $query = $builder->get();
         return $query->getRow();
