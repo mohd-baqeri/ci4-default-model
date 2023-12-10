@@ -12,15 +12,21 @@ By the following functions, you can do whatever can be done by a model:
      
      * updateTblRow($tbl, $data, $where = [])
      
-     * getTblRows($tbl, $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+     * getTblRows($tbl, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
      
-     * getTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+     * getTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
      
-     * searchTblRows($tbl, $like = [], $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+     * searchTblRows($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
      
-     * searchTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id', $orderVal = 'ASC', $limit = false, $offset = false)
+     * searchTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
      
      * getTblRow($tbl, $where = [])
+
+     * getTblRowFirst($tbl, $where = [], $orderBy = 'id ASC')
+
+     * getTblRowLast($tbl, $where = [], $orderBy = 'id DESC')
+
+     * getTblRowMath($tbl, $math = 'SUM', $col, $where = [])
      
      * getTblRowJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [])
      
