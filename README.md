@@ -22,6 +22,10 @@ By the following functions, you can do whatever can be done by a model:
      
      * getTblRow($tbl, $where = [])
 
+     * getTblRowNext($tbl, $current_col_name, $current_col_val, $where = [])
+
+     * getTblRowPrev($tbl, $current_col_name, $current_col_val, $where = [])
+
      * getTblRowFirst($tbl, $where = [], $orderBy = 'id ASC')
 
      * getTblRowLast($tbl, $where = [], $orderBy = 'id DESC')
