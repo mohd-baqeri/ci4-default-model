@@ -14,6 +14,8 @@ class DefaultModel extends Model
      * searchTblRows
      * searchTblRowsJoin
      * getTblRow
+     * getTblRowNext
+     * getTblRowPrev
      * getTblRowFirst
      * getTblRowLast
      * getTblRowMath
@@ -98,6 +100,28 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
+    // getTblRowNext
+    public function getTblRowNext($tbl, $current_col_name, $current_col_val, $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->where($current_col_name . ' >', $current_col_val);
+        $builder->orderBy($current_col_name, 'ASC');
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
+    // getTblRowPrev
+    public function getTblRowPrev($tbl, $current_col_name, $current_col_val, $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->where($current_col_name . ' <', $current_col_val);
+        $builder->orderBy($current_col_name, 'DESC');
         $query = $builder->get();
         return $query->getRow();
     }
