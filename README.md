@@ -8,34 +8,38 @@ Full CRUD functions for Codeigniter 4:
 
 By the following functions, you can do whatever can be done by a model:
 
-     * addTblRow($tbl, $data)
+     * addRow($tbl, $data)
      
-     * updateTblRow($tbl, $data, $where = [])
+     * updateRow($tbl, $data, $where = [])
      
-     * getTblRows($tbl, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
-     
-     * getTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
-     
-     * searchTblRows($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
-     
-     * searchTblRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
-     
-     * getTblRow($tbl, $where = [])
+     * deleteRow($tbl, $where = [], $status = 'delete')
 
-     * getTblRowNext($tbl, $current_col_name, $current_col_val, $where = [])
+     * getRows($tbl, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
-     * getTblRowPrev($tbl, $current_col_name, $current_col_val, $where = [])
+     * getRowsIn($tbl, $whereInCol, $whereInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
-     * getTblRowFirst($tbl, $where = [], $orderBy = 'id ASC')
+     * getRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
-     * getTblRowLast($tbl, $where = [], $orderBy = 'id DESC')
+     * getRowsSearch($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
-     * getTblRowMath($tbl, $math = 'SUM', $col, $where = [])
-     
-     * getTblRowJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [])
-     
-     * deleteTblRow($tbl, $where = [], $status = 'delete')
-     
-     * getTblRowsDistinct($tbl, $col = false, $where = [])
+     * getRowsSearchJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+
+     * getDistinctRows($tbl, $distinct_col, $where = [])
+
+     * getRow($tbl, $where = [])
+
+     * getRowIn($tbl, $whereInCol, $whereInVal, $where = [])
+
+     * getNextRow($tbl, $current_col_name, $current_col_val, $where = [])
+
+     * getPrevRow($tbl, $current_col_name, $current_col_val, $where = [])
+
+     * getFirstRow($tbl, $where = [], $orderBy = 'id ASC')
+
+     * getLastRow($tbl, $where = [], $orderBy = 'id DESC')
+
+     * getRowMath($tbl, $math = 'SUM', $col, $where = [])
+
+     * getRowJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = '')
 
 
