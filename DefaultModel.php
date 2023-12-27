@@ -19,7 +19,9 @@ class DefaultModel extends Model
      * getRow
      * getRowIn
      * getNextRow
+     * getNextRows
      * getPrevRow
+     * getPrevRows
      * getFirstRow
      * getLastRow
      * getRowMath
@@ -181,6 +183,17 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 
+    // getNextRows
+    public function getNextRows($tbl, $current_col_name, $current_col_val, $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->where($current_col_name . ' >', $current_col_val);
+        $builder->orderBy($current_col_name, 'ASC');
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
     // getPrevRow
     public function getPrevRow($tbl, $current_col_name, $current_col_val, $where = [])
     {
@@ -190,6 +203,17 @@ class DefaultModel extends Model
         $builder->orderBy($current_col_name, 'DESC');
         $query = $builder->get();
         return $query->getRow();
+    }
+
+    // getPrevRows
+    public function getPrevRows($tbl, $current_col_name, $current_col_val, $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->where($current_col_name . ' <', $current_col_val);
+        $builder->orderBy($current_col_name, 'DESC');
+        $query = $builder->get();
+        return $query->getResult();
     }
 
     // getFirstRow
