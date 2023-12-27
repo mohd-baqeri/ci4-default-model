@@ -31,8 +31,12 @@ By the following functions, you can do whatever can be done by a model:
      * getRowIn($tbl, $whereInCol, $whereInVal, $where = [])
 
      * getNextRow($tbl, $current_col_name, $current_col_val, $where = [])
+     
+     * getNextRows($tbl, $current_col_name, $current_col_val, $where = [])
 
      * getPrevRow($tbl, $current_col_name, $current_col_val, $where = [])
+     
+     * getPrevRows($tbl, $current_col_name, $current_col_val, $where = [])
 
      * getFirstRow($tbl, $where = [], $orderBy = 'id ASC')
 
