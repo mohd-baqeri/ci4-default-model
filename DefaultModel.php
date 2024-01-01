@@ -239,7 +239,7 @@ class DefaultModel extends Model
     }
 
     // getRowMath
-    public function getRowMath($tbl, $math = 'SUM', $col, $where = [])
+    public function getRowMath($tbl, $math = 'SUM', $col = 'id', $where = [])
     {
         $builder = $this->db->table($tbl);
         if ($math == 'AVG') $builder->selectAvg($col, 'avg_' . $col);
