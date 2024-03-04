@@ -12,12 +12,14 @@ class DefaultModel extends Model
      * deleteRow
      * getRows
      * getRowsIn
+     * getRowsNotIn
      * getRowsJoin
      * getRowsSearch
      * getRowsSearchJoin
      * getDistinctRows
      * getRow
      * getRowIn
+     * getRowNotIn 
      * getNextRow
      * getNextRows
      * getPrevRow
@@ -44,7 +46,7 @@ class DefaultModel extends Model
         $builder->update($data);
         return true;
     }
-    
+
     // deleteRow
     public function deleteRow($tbl, $where = [], $status = 'delete')
     {
@@ -81,8 +83,10 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->where($where);
         $builder->orderBy($orderBy);
-        if ($limit && !$offset) $builder->limit($limit);
-        if ($limit && $offset) $builder->limit($limit, $offset);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
@@ -94,8 +98,25 @@ class DefaultModel extends Model
         $builder->where($where);
         $builder->whereIn($whereInCol, $whereInVal);
         $builder->orderBy($orderBy);
-        if ($limit && !$offset) $builder->limit($limit);
-        if ($limit && $offset) $builder->limit($limit, $offset);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
+    // getRowsNotIn
+    public function getRowsNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->whereNotIn($whereNotInCol, $whereNotInVal);
+        $builder->orderBy($orderBy);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
@@ -108,8 +129,10 @@ class DefaultModel extends Model
         $builder->where($where);
         $builder->orderBy($orderBy);
         $builder->join($tbl2, $onClause);
-        if ($limit && !$offset) $builder->limit($limit);
-        if ($limit && $offset) $builder->limit($limit, $offset);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
@@ -121,8 +144,10 @@ class DefaultModel extends Model
         $builder->like($like);
         $builder->where($where);
         $builder->orderBy($orderBy);
-        if ($limit && !$offset) $builder->limit($limit);
-        if ($limit && $offset) $builder->limit($limit, $offset);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
@@ -136,28 +161,38 @@ class DefaultModel extends Model
         $builder->like($like);
         $builder->orderBy($orderBy);
         $builder->join($tbl2, $onClause);
-        if ($limit && !$offset) $builder->limit($limit);
-        if ($limit && $offset) $builder->limit($limit, $offset);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
 
     // getDistinctRows
-    public function getDistinctRows($tbl, $distinct_col, $where = [])
+    public function getDistinctRows($tbl, $distinct_col, $where = [], $orderBy = NULL, $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->select($distinct_col);
         $builder->distinct($distinct_col);
         $builder->where($where);
+        if ($orderBy)
+            $builder->orderBy($orderBy);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
 
     // getRow
-    public function getRow($tbl, $where = [])
+    public function getRow($tbl, $where = [], $orderBy = NULL)
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
+        if ($orderBy)
+            $builder->orderBy($orderBy);
         $query = $builder->get();
         return $query->getRow();
     }
@@ -168,6 +203,16 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->where($where);
         $builder->whereIn($whereInCol, $whereInVal);
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
+    // getRowNotIn
+    public function getRowNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->whereNotIn($whereNotInCol, $whereNotInVal);
         $query = $builder->get();
         return $query->getRow();
     }
@@ -184,12 +229,16 @@ class DefaultModel extends Model
     }
 
     // getNextRows
-    public function getNextRows($tbl, $current_col_name, $current_col_val, $where = [])
+    public function getNextRows($tbl, $current_col_name, $current_col_val, $where = [], $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
         $builder->where($current_col_name . ' >', $current_col_val);
         $builder->orderBy($current_col_name, 'ASC');
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
@@ -206,12 +255,16 @@ class DefaultModel extends Model
     }
 
     // getPrevRows
-    public function getPrevRows($tbl, $current_col_name, $current_col_val, $where = [])
+    public function getPrevRows($tbl, $current_col_name, $current_col_val, $where = [], $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
         $builder->where($current_col_name . ' <', $current_col_val);
         $builder->orderBy($current_col_name, 'DESC');
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
         $query = $builder->get();
         return $query->getResult();
     }
@@ -242,11 +295,16 @@ class DefaultModel extends Model
     public function getRowMath($tbl, $math = 'SUM', $col = 'id', $where = [])
     {
         $builder = $this->db->table($tbl);
-        if ($math == 'AVG') $builder->selectAvg($col, 'avg_' . $col);
-        if ($math == 'COUNT') $builder->selectCount($col, 'count_' . $col);
-        if ($math == 'MAX') $builder->selectMax($col, 'max_' . $col);
-        if ($math == 'MIN') $builder->selectMin($col, 'min_' . $col);
-        if ($math == 'SUM') $builder->selectSum($col, 'sum_' . $col);
+        if ($math == 'AVG')
+            $builder->selectAvg($col, 'avg_' . $col);
+        if ($math == 'COUNT')
+            $builder->selectCount($col, 'count_' . $col);
+        if ($math == 'MAX')
+            $builder->selectMax($col, 'max_' . $col);
+        if ($math == 'MIN')
+            $builder->selectMin($col, 'min_' . $col);
+        if ($math == 'SUM')
+            $builder->selectSum($col, 'sum_' . $col);
         $builder->where($where);
         $query = $builder->get();
         return $query->getRow();
