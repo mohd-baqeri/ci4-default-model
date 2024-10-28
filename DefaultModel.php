@@ -12,11 +12,15 @@ class DefaultModel extends Model
      * deleteRow
      * getRows
      * getRowsIn
+     * getRowsInSearch
      * getRowsNotIn
+     * getRowsNotInSearch
      * getRowsJoin
      * getRowsSearch
+     * getRowSearch
      * getRowsSearchJoin
      * getDistinctRows
+     * getDistinctRowsSearch
      * getRow
      * getRowIn
      * getRowNotIn 
@@ -27,6 +31,7 @@ class DefaultModel extends Model
      * getFirstRow
      * getLastRow
      * getRowMath
+     * getRowMathSearch
      * getRowJoin
      */
 
@@ -106,10 +111,42 @@ class DefaultModel extends Model
         return $query->getResult();
     }
 
+    // getRowsInSearch
+    public function getRowsInSearch($tbl, $whereInCol, $whereInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    {
+        $builder = $this->db->table($tbl);
+        $builder->like($like);
+        $builder->where($where);
+        $builder->whereIn($whereInCol, $whereInVal);
+        $builder->orderBy($orderBy);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
     // getRowsNotIn
     public function getRowsNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
+        $builder->where($where);
+        $builder->whereNotIn($whereNotInCol, $whereNotInVal);
+        $builder->orderBy($orderBy);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
+    // getRowsNotInSearch
+    public function getRowsNotInSearch($tbl, $whereNotInCol, $whereNotInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    {
+        $builder = $this->db->table($tbl);
+        $builder->like($like);
         $builder->where($where);
         $builder->whereNotIn($whereNotInCol, $whereNotInVal);
         $builder->orderBy($orderBy);
@@ -152,6 +189,21 @@ class DefaultModel extends Model
         return $query->getResult();
     }
 
+    // getRowSearch
+    public function getRowSearch($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    {
+        $builder = $this->db->table($tbl);
+        $builder->like($like);
+        $builder->where($where);
+        $builder->orderBy($orderBy);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
     // getRowsSearchJoin
     public function getRowsSearchJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
     {
@@ -175,6 +227,24 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->select($distinct_col);
         $builder->distinct($distinct_col);
+        $builder->where($where);
+        if ($orderBy)
+            $builder->orderBy($orderBy);
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
+    // getDistinctRowsSearch
+    public function getDistinctRowsSearch($tbl, $distinct_col, $like = [], $where = [], $orderBy = NULL, $limit = false, $offset = false)
+    {
+        $builder = $this->db->table($tbl);
+        $builder->select($distinct_col);
+        $builder->distinct($distinct_col);
+        $builder->like($like);
         $builder->where($where);
         if ($orderBy)
             $builder->orderBy($orderBy);
@@ -295,6 +365,26 @@ class DefaultModel extends Model
     public function getRowMath($tbl, $math = 'SUM', $col = 'id', $where = [])
     {
         $builder = $this->db->table($tbl);
+        if ($math == 'AVG')
+            $builder->selectAvg($col, 'avg_' . $col);
+        if ($math == 'COUNT')
+            $builder->selectCount($col, 'count_' . $col);
+        if ($math == 'MAX')
+            $builder->selectMax($col, 'max_' . $col);
+        if ($math == 'MIN')
+            $builder->selectMin($col, 'min_' . $col);
+        if ($math == 'SUM')
+            $builder->selectSum($col, 'sum_' . $col);
+        $builder->where($where);
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
+    // getRowMathSearch
+    public function getRowMathSearch($tbl, $math = 'SUM', $col = 'id', $like = [], $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        $builder->like($like);
         if ($math == 'AVG')
             $builder->selectAvg($col, 'avg_' . $col);
         if ($math == 'COUNT')
