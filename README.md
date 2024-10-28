@@ -18,7 +18,11 @@ By the following functions, you can do whatever can be done by a model:
 
      * getRowsIn($tbl, $whereInCol, $whereInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
+     * getRowsInSearch($tbl, $whereInCol, $whereInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+
      * getRowsNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+
+     * getRowsNotInSearch($tbl, $whereNotInCol, $whereNotInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
      * getRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
@@ -27,6 +31,8 @@ By the following functions, you can do whatever can be done by a model:
      * getRowsSearchJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
 
      * getDistinctRows($tbl, $distinct_col, $where = [], $orderBy = NULL, $limit = false, $offset = false)
+
+     * getDistinctRowsSearch($tbl, $distinct_col, $like = [], $where = [], $orderBy = NULL, $limit = false, $offset = false)
 
      * getRow($tbl, $where = [], $orderBy = NULL)
 
@@ -47,6 +53,8 @@ By the following functions, you can do whatever can be done by a model:
      * getLastRow($tbl, $where = [], $orderBy = 'id DESC')
 
      * getRowMath($tbl, $math = 'SUM', $col = 'id', $where = [])
+
+     * getRowMathSearch($tbl, $math = 'SUM', $col = 'id', $like = [], $where = [])
 
      * getRowJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = '')
      
