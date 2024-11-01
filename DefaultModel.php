@@ -303,8 +303,14 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->where($current_col_name . ' >', $current_col_val);
-        $builder->orderBy($current_col_name, 'ASC');
+        if (strpos($current_col_name, ' ')) {
+            $current_col_name_arr = explode(' ', $current_col_name);
+            $builder->where($current_col_name_arr[0] . ' ' . $current_col_name_arr[1], $current_col_val);
+            $builder->orderBy($current_col_name_arr[0], 'ASC');
+        } else {
+            $builder->where($current_col_name . ' >', $current_col_val);
+            $builder->orderBy($current_col_name, 'ASC');
+        }
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -312,7 +318,7 @@ class DefaultModel extends Model
         $query = $builder->get();
         return $query->getResult();
     }
-
+    
     // getPrevRow
     public function getPrevRow($tbl, $current_col_name, $current_col_val, $where = [])
     {
@@ -329,8 +335,14 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->where($current_col_name . ' <', $current_col_val);
-        $builder->orderBy($current_col_name, 'DESC');
+        if (strpos($current_col_name, ' ')) {
+            $current_col_name_arr = explode(' ', $current_col_name);
+            $builder->where($current_col_name_arr[0] . ' ' . $current_col_name_arr[1], $current_col_val);
+            $builder->orderBy($current_col_name_arr[0], 'DESC');
+        } else {
+            $builder->where($current_col_name . ' <=', $current_col_val);
+            $builder->orderBy($current_col_name, 'DESC');
+        }
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
