@@ -2,7 +2,7 @@
 A MUST model for CodeIgniter 4 projects.
 
 INSTALLATION:
-  Just download the file "DefaultModel.php" and put it in the "Models" directory of your CodeIgniter project.
+  Just download the file "DefaultModel.php" and put it in your CodeIgniter project's "Models" directory.
 
 Full CRUD functions for Codeigniter 4:
 
@@ -58,4 +58,4 @@ By the following functions, you can do whatever can be done by a model:
 
      * getRowJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = '')
      
-
+*Note:* It's based on the Query Builder Model.
