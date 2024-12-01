@@ -4,7 +4,26 @@ A MUST model for CodeIgniter 4 projects.
 INSTALLATION:
   Just download the file "DefaultModel.php" and put it in your CodeIgniter project's "Models" directory.
 
-Full CRUD functions for Codeigniter 4:
+Full CRUD functions for Codeigniter 4 using Query Builder.
+
+  The code example in a controller:
+  
+    private $model;
+    
+    public function __construct()
+    {
+        $this->model = new DefaultModel();
+    }
+
+    public function index()
+    {
+        $data = [
+          'firstname' => 'Mohammad', // Your input data
+          'lastname' => 'Baqeri', // Your input data
+        ];
+        $id = $this->model->addRow('users', $data);
+    }
+
 
 By the following functions, you can do whatever can be done by a model:
 
