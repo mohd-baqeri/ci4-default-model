@@ -92,7 +92,7 @@ class DefaultModel extends Model
             $builder->limit($limit);
         if ($limit && $offset)
             $builder->limit($limit, $offset);
-        $query = $builder->get();
+        $query = $builder->get($limit, $offset);
         return $query->getResult();
     }
 
@@ -101,7 +101,11 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->whereIn($whereInCol, $whereInVal);
+
+        is_array($whereInVal)
+            ? $builder->whereIn($whereInCol, $whereInVal)
+            : $builder->whereIn($whereInCol, [$whereInVal]);
+
         $builder->orderBy($orderBy);
         if ($limit && !$offset)
             $builder->limit($limit);
@@ -117,7 +121,11 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->like($like);
         $builder->where($where);
-        $builder->whereIn($whereInCol, $whereInVal);
+
+        is_array($whereInVal)
+            ? $builder->whereIn($whereInCol, $whereInVal)
+            : $builder->whereIn($whereInCol, [$whereInVal]);
+
         $builder->orderBy($orderBy);
         if ($limit && !$offset)
             $builder->limit($limit);
@@ -132,7 +140,11 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->whereNotIn($whereNotInCol, $whereNotInVal);
+
+        is_array($whereNotInVal)
+            ? $builder->whereNotIn($whereNotInCol, $whereNotInVal)
+            : $builder->whereNotIn($whereNotInCol, [$whereNotInVal]);
+
         $builder->orderBy($orderBy);
         if ($limit && !$offset)
             $builder->limit($limit);
@@ -148,7 +160,11 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->like($like);
         $builder->where($where);
-        $builder->whereNotIn($whereNotInCol, $whereNotInVal);
+
+        is_array($whereNotInVal)
+            ? $builder->whereNotIn($whereNotInCol, $whereNotInVal)
+            : $builder->whereNotIn($whereNotInCol, [$whereNotInVal]);
+
         $builder->orderBy($orderBy);
         if ($limit && !$offset)
             $builder->limit($limit);
@@ -272,7 +288,11 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->whereIn($whereInCol, $whereInVal);
+
+        is_array($whereInVal)
+            ? $builder->whereIn($whereInCol, $whereInVal)
+            : $builder->whereIn($whereInCol, [$whereInVal]);
+
         $query = $builder->get();
         return $query->getRow();
     }
@@ -282,7 +302,11 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->whereNotIn($whereNotInCol, $whereNotInVal);
+
+        is_array($whereNotInVal)
+            ? $builder->whereNotIn($whereNotInCol, $whereNotInVal)
+            : $builder->whereNotIn($whereNotInCol, [$whereNotInVal]);
+
         $query = $builder->get();
         return $query->getRow();
     }
@@ -318,7 +342,7 @@ class DefaultModel extends Model
         $query = $builder->get();
         return $query->getResult();
     }
-    
+
     // getPrevRow
     public function getPrevRow($tbl, $current_col_name, $current_col_val, $where = [])
     {
