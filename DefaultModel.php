@@ -87,12 +87,21 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
             $builder->limit($limit, $offset);
         $query = $builder->get($limit, $offset);
+
         return $query->getResult();
     }
 
@@ -106,7 +115,14 @@ class DefaultModel extends Model
             ? $builder->whereIn($whereInCol, $whereInVal)
             : $builder->whereIn($whereInCol, [$whereInVal]);
 
-        $builder->orderBy($orderBy);
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -126,7 +142,14 @@ class DefaultModel extends Model
             ? $builder->whereIn($whereInCol, $whereInVal)
             : $builder->whereIn($whereInCol, [$whereInVal]);
 
-        $builder->orderBy($orderBy);
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -145,7 +168,14 @@ class DefaultModel extends Model
             ? $builder->whereNotIn($whereNotInCol, $whereNotInVal)
             : $builder->whereNotIn($whereNotInCol, [$whereNotInVal]);
 
-        $builder->orderBy($orderBy);
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -165,7 +195,14 @@ class DefaultModel extends Model
             ? $builder->whereNotIn($whereNotInCol, $whereNotInVal)
             : $builder->whereNotIn($whereNotInCol, [$whereNotInVal]);
 
-        $builder->orderBy($orderBy);
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -180,7 +217,15 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl1);
         $builder->select($select);
         $builder->where($where);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         $builder->join($tbl2, $onClause);
         if ($limit && !$offset)
             $builder->limit($limit);
@@ -196,7 +241,15 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->like($like);
         $builder->where($where);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -211,7 +264,15 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->like($like);
         $builder->where($where);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -227,7 +288,15 @@ class DefaultModel extends Model
         $builder->select($select);
         $builder->where($where);
         $builder->like($like);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         $builder->join($tbl2, $onClause);
         if ($limit && !$offset)
             $builder->limit($limit);
@@ -244,8 +313,17 @@ class DefaultModel extends Model
         $builder->select($distinct_col);
         $builder->distinct($distinct_col);
         $builder->where($where);
-        if ($orderBy)
-            $builder->orderBy($orderBy);
+
+        if ($orderBy) {
+            if (is_array($orderBy)) {
+                foreach ($orderBy as $orderByItem) {
+                    $builder->orderBy($orderByItem);
+                }
+            } else {
+                $builder->orderBy($orderBy);
+            }
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -262,8 +340,17 @@ class DefaultModel extends Model
         $builder->distinct($distinct_col);
         $builder->like($like);
         $builder->where($where);
-        if ($orderBy)
-            $builder->orderBy($orderBy);
+
+        if ($orderBy) {
+            if (is_array($orderBy)) {
+                foreach ($orderBy as $orderByItem) {
+                    $builder->orderBy($orderByItem);
+                }
+            } else {
+                $builder->orderBy($orderBy);
+            }
+        }
+
         if ($limit && !$offset)
             $builder->limit($limit);
         if ($limit && $offset)
@@ -277,8 +364,17 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        if ($orderBy)
-            $builder->orderBy($orderBy);
+
+        if ($orderBy) {
+            if (is_array($orderBy)) {
+                foreach ($orderBy as $orderByItem) {
+                    $builder->orderBy($orderByItem);
+                }
+            } else {
+                $builder->orderBy($orderBy);
+            }
+        }
+
         $query = $builder->get();
         return $query->getRow();
     }
@@ -380,7 +476,15 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         $builder->limit(1);
         $query = $builder->get();
         return $query->getRow();
@@ -391,7 +495,15 @@ class DefaultModel extends Model
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         $builder->limit(1);
         $query = $builder->get();
         return $query->getRow();
@@ -442,7 +554,15 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl1);
         $builder->select($select);
         $builder->where($where);
-        $builder->orderBy($orderBy);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
         $builder->join($tbl2, $onClause);
         $query = $builder->get();
         return $query->getRow();
