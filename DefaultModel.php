@@ -12,6 +12,7 @@ class DefaultModel extends Model
      * deleteRow
      * getRows
      * getRowsIn
+     * getRowsInJoin
      * getRowsInSearch
      * getRowsNotIn
      * getRowsNotInSearch
@@ -122,6 +123,35 @@ class DefaultModel extends Model
         } else {
             $builder->orderBy($orderBy);
         }
+
+        if ($limit && !$offset)
+            $builder->limit($limit);
+        if ($limit && $offset)
+            $builder->limit($limit, $offset);
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
+    // getRowsInJoin
+    public function getRowsInJoin($tbl1, $tbl2, $onClause, $select = '*', $whereInCol, $whereInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false): array
+    {
+        $builder = $this->db->table($tbl1);
+        $builder->select($select);
+        $builder->where($where);
+
+        is_array($whereInVal)
+            ? $builder->whereIn($whereInCol, $whereInVal)
+            : $builder->whereIn($whereInCol, [$whereInVal]);
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $orderByItem) {
+                $builder->orderBy($orderByItem);
+            }
+        } else {
+            $builder->orderBy($orderBy);
+        }
+
+        $builder->join($tbl2, $onClause);
 
         if ($limit && !$offset)
             $builder->limit($limit);
