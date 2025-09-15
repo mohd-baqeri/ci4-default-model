@@ -28,6 +28,8 @@ Full CRUD functions for Codeigniter 4 using Query Builder.
 By the following functions, you can do whatever can be done by a model:
 
      * addRow($tbl, $data)
+
+     * addRows($tbl, $data)
      
      * updateRow($tbl, $data, $where = [])
      
