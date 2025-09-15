@@ -8,6 +8,7 @@ class DefaultModel extends Model
 {
     /**
      * addRow
+     * addRows
      * updateRow
      * deleteRow
      * getRows
@@ -42,6 +43,14 @@ class DefaultModel extends Model
         $builder = $this->db->table($tbl);
         $builder->insert($data);
         return $this->db->insertID();
+    }
+
+    // addRows
+    public function addRows($tbl, $data)
+    {
+        $builder = $this->db->table($tbl);
+        $result = $builder->insertBatch($data);
+        return $result;
     }
 
     // updateRow
@@ -598,3 +607,4 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 }
+
