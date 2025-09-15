@@ -10,6 +10,7 @@ class DefaultModel extends Model
      * addRow
      * addRows
      * updateRow
+     * updateRows
      * deleteRow
      * getRows
      * getRowsIn
@@ -60,6 +61,14 @@ class DefaultModel extends Model
         $builder->where($where);
         $builder->update($data);
         return true;
+    }
+
+    // updateRows
+    public function updateRows($tbl, $data, $key = 'id')
+    {
+        $builder = $this->db->table($tbl);
+        $result = $builder->updateBatch($data, $key);
+        return $result;
     }
 
     // deleteRow
@@ -607,4 +616,5 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 }
+
 
