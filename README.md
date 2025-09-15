@@ -32,6 +32,8 @@ By the following functions, you can do whatever can be done by a model:
      * addRows($tbl, $data)
      
      * updateRow($tbl, $data, $where = [])
+
+     * updateRows($tbl, $data, $key = 'id')
      
      * deleteRow($tbl, $where = [], $status = 'delete')
 
