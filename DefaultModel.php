@@ -64,10 +64,10 @@ class DefaultModel extends Model
     }
 
     // updateRows
-    public function updateRows($tbl, $data, $key = 'id')
+    public function updateRows($tbl, $data, $where = [])
     {
         $builder = $this->db->table($tbl);
-        $result = $builder->updateBatch($data, $key);
+        $result = $builder->updateBatch($data, $where);
         return $result;
     }
 
@@ -576,6 +576,30 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 
+    // getRowMathIn
+    public function getRowMathIn($tbl, $math = 'SUM', $col = 'id', $whereInCol, $whereInVal, $where = [])
+    {
+        $builder = $this->db->table($tbl);
+        if ($math == 'AVG')
+            $builder->selectAvg($col, 'avg_' . $col);
+        if ($math == 'COUNT')
+            $builder->selectCount($col, 'count_' . $col);
+        if ($math == 'MAX')
+            $builder->selectMax($col, 'max_' . $col);
+        if ($math == 'MIN')
+            $builder->selectMin($col, 'min_' . $col);
+        if ($math == 'SUM')
+            $builder->selectSum($col, 'sum_' . $col);
+        $builder->where($where);
+
+        is_array($whereInVal)
+            ? $builder->whereIn($whereInCol, $whereInVal)
+            : $builder->whereIn($whereInCol, [$whereInVal]);
+
+        $query = $builder->get();
+        return $query->getRow();
+    }
+
     // getRowMathSearch
     public function getRowMathSearch($tbl, $math = 'SUM', $col = 'id', $like = [], $where = [])
     {
@@ -616,5 +640,6 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 }
+
 
 
