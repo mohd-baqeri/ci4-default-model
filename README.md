@@ -33,7 +33,7 @@ By the following functions, you can do whatever can be done by a model:
      
      * updateRow($tbl, $data, $where = [])
 
-     * updateRows($tbl, $data, $key = 'id')
+     * updateRows($tbl, $data, $where = [])
      
      * deleteRow($tbl, $where = [], $status = 'delete')
 
@@ -78,6 +78,8 @@ By the following functions, you can do whatever can be done by a model:
      * getLastRow($tbl, $where = [], $orderBy = 'id DESC')
 
      * getRowMath($tbl, $math = 'SUM', $col = 'id', $where = [])
+
+     * getRowMathIn($tbl, $math = 'SUM', $col = 'id', $whereInCol, $whereInVal, $where = [])
 
      * getRowMathSearch($tbl, $math = 'SUM', $col = 'id', $like = [], $where = [])
 
