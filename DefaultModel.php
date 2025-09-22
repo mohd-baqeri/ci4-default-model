@@ -103,7 +103,7 @@ class DefaultModel extends Model
     }
 
     // getRows
-    public function getRows($tbl, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRows($tbl, $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
@@ -126,7 +126,7 @@ class DefaultModel extends Model
     }
 
     // getRowsIn
-    public function getRowsIn($tbl, $whereInCol, $whereInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowsIn($tbl, $whereInCol, $whereInVal, $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
@@ -152,7 +152,7 @@ class DefaultModel extends Model
     }
 
     // getRowsInJoin
-    public function getRowsInJoin($tbl1, $tbl2, $onClause, $select = '*', $whereInCol, $whereInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false): array
+    public function getRowsInJoin($tbl1, $tbl2, $onClause, $select = '*', $whereInCol, $whereInVal, $where = [], $orderBy = '', $limit = false, $offset = false): array
     {
         $builder = $this->db->table($tbl1);
         $builder->select($select);
@@ -181,7 +181,7 @@ class DefaultModel extends Model
     }
 
     // getRowsInSearch
-    public function getRowsInSearch($tbl, $whereInCol, $whereInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowsInSearch($tbl, $whereInCol, $whereInVal, $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->like($like);
@@ -208,7 +208,7 @@ class DefaultModel extends Model
     }
 
     // getRowsNotIn
-    public function getRowsNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowsNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
@@ -234,7 +234,7 @@ class DefaultModel extends Model
     }
 
     // getRowsNotInSearch
-    public function getRowsNotInSearch($tbl, $whereNotInCol, $whereNotInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowsNotInSearch($tbl, $whereNotInCol, $whereNotInVal, $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->like($like);
@@ -261,7 +261,7 @@ class DefaultModel extends Model
     }
 
     // getRowsJoin
-    public function getRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl1);
         $builder->select($select);
@@ -285,7 +285,7 @@ class DefaultModel extends Model
     }
 
     // getRowsSearch
-    public function getRowsSearch($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowsSearch($tbl, $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->like($like);
@@ -308,7 +308,7 @@ class DefaultModel extends Model
     }
 
     // getRowSearch
-    public function getRowSearch($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowSearch($tbl, $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl);
         $builder->like($like);
@@ -331,7 +331,7 @@ class DefaultModel extends Model
     }
 
     // getRowsSearchJoin
-    public function getRowsSearchJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+    public function getRowsSearchJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
     {
         $builder = $this->db->table($tbl1);
         $builder->select($select);
@@ -521,7 +521,7 @@ class DefaultModel extends Model
     }
 
     // getFirstRow
-    public function getFirstRow($tbl, $where = [], $orderBy = 'id ASC')
+    public function getFirstRow($tbl, $where = [], $orderBy = '')
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
@@ -641,6 +641,7 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 }
+
 
 
 
