@@ -521,7 +521,7 @@ class DefaultModel extends Model
     }
 
     // getFirstRow
-    public function getFirstRow($tbl, $where = [], $orderBy = '')
+    public function getFirstRow($tbl, $where = [], $orderBy = 'id ASC')
     {
         $builder = $this->db->table($tbl);
         $builder->where($where);
@@ -641,6 +641,7 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 }
+
 
 
 
