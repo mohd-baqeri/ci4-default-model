@@ -73,7 +73,7 @@ By the following functions, you can do whatever can be done by a model:
 
      * getPrevRows($tbl, $current_col_name, $current_col_val, $where = [], $limit = false, $offset = false)
 
-     * getFirstRow($tbl, $where = [], $orderBy = '')
+     * getFirstRow($tbl, $where = [], $orderBy = 'id ASC')
 
      * getLastRow($tbl, $where = [], $orderBy = 'id DESC')
 
