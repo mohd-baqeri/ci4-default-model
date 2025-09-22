@@ -37,23 +37,23 @@ By the following functions, you can do whatever can be done by a model:
      
      * deleteRow($tbl, $where = [], $status = 'delete')
 
-     * getRows($tbl, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRows($tbl, $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsIn($tbl, $whereInCol, $whereInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsIn($tbl, $whereInCol, $whereInVal, $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsInJoin($tbl1, $tbl2, $onClause, $select = '*', $whereInCol, $whereInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsInJoin($tbl1, $tbl2, $onClause, $select = '*', $whereInCol, $whereInVal, $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsInSearch($tbl, $whereInCol, $whereInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsInSearch($tbl, $whereInCol, $whereInVal, $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsNotIn($tbl, $whereNotInCol, $whereNotInVal, $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsNotInSearch($tbl, $whereNotInCol, $whereNotInVal, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsNotInSearch($tbl, $whereNotInCol, $whereNotInVal, $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsJoin($tbl1, $tbl2, $onClause, $select = '*', $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsSearch($tbl, $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsSearch($tbl, $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
 
-     * getRowsSearchJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = 'id ASC', $limit = false, $offset = false)
+     * getRowsSearchJoin($tbl1, $tbl2, $onClause, $select = '*', $like = [], $where = [], $orderBy = '', $limit = false, $offset = false)
 
      * getDistinctRows($tbl, $distinct_col, $where = [], $orderBy = NULL, $limit = false, $offset = false)
 
@@ -73,7 +73,7 @@ By the following functions, you can do whatever can be done by a model:
 
      * getPrevRows($tbl, $current_col_name, $current_col_val, $where = [], $limit = false, $offset = false)
 
-     * getFirstRow($tbl, $where = [], $orderBy = 'id ASC')
+     * getFirstRow($tbl, $where = [], $orderBy = '')
 
      * getLastRow($tbl, $where = [], $orderBy = 'id DESC')
 
