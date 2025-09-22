@@ -34,6 +34,7 @@ class DefaultModel extends Model
      * getFirstRow
      * getLastRow
      * getRowMath
+     * getRowMathIn
      * getRowMathSearch
      * getRowJoin
      */
@@ -640,6 +641,7 @@ class DefaultModel extends Model
         return $query->getRow();
     }
 }
+
 
 
 
